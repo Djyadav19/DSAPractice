@@ -8,13 +8,13 @@ public class LexicographicallySmallestEquivalentString1061 {
         /*
         let's create adjList.
          */
-        Map<Character,List<Character>> adjMap = new HashMap<>();
+        Map<Character,Set<Character>> adjMap = new HashMap<>();
 
         for(int i = 0;i<s1.length();i++){
-            List<Character> s1tos2 = adjMap.getOrDefault(s1.charAt(i),new ArrayList<>());
+            Set<Character> s1tos2 = adjMap.getOrDefault(s1.charAt(i),new HashSet<>());
             s1tos2.add(s2.charAt(i));
             adjMap.put(s1.charAt(i),s1tos2);
-            List<Character> s2tos1 = adjMap.getOrDefault(s2.charAt(i),new ArrayList<>());
+            Set<Character> s2tos1 = adjMap.getOrDefault(s2.charAt(i),new HashSet<>());
             s2tos1.add(s1.charAt(i));
             adjMap.put(s2.charAt(i),s2tos1);
         }
@@ -28,7 +28,7 @@ public class LexicographicallySmallestEquivalentString1061 {
         return sb.toString();
     }
 
-    private char dfs(char c, char base, Map<Character, List<Character>> adjMap, Set<Character> visited, StringBuilder sb) {
+    private char dfs(char c, char base, Map<Character, Set<Character>> adjMap, Set<Character> visited, StringBuilder sb) {
         if(visited.contains(c)){
             if(c > base){
                 return  base;
@@ -36,7 +36,7 @@ public class LexicographicallySmallestEquivalentString1061 {
             return c;
         }
         visited.add(c);
-        List<Character> neighbours = adjMap.getOrDefault(c,new ArrayList<>());
+        Set<Character> neighbours = adjMap.getOrDefault(c,new HashSet<>());
         char tempChar = Character.MAX_VALUE;
         if(base > c){;
             tempChar = c;
