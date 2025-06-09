@@ -5,12 +5,12 @@ import java.util.*;
 
 public class KthSmallestinLexicographicalOrder440 {
 
-    private int count(int current, int next, int n) {
+    private int count(long current, long next, int n) {
         int countNumber = 0;
         while(current <= n){
             countNumber += (next-current);
             current *= 10;
-            next = Math.min(next*10 ,n+1);
+            next = Math.min(next*10 ,(long)n+1);
         }
         return countNumber;
     }

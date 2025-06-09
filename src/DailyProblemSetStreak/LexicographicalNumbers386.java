@@ -20,7 +20,7 @@ public class LexicographicalNumbers386 {
     public List<Integer> lexicalOrder(int n) {
 
         List<Integer> answer = new ArrayList<>();
-        for(int i = 1;i<=n;i++){
+        for(int i = 1;i<=9;i++){
             constructNumber(i,n,answer);
         }
 
@@ -43,6 +43,6 @@ public class LexicographicalNumbers386 {
 
     public static void main(String[] args){
         LexicographicalNumbers386 solver  = new LexicographicalNumbers386();
-        System.out.println(solver.lexicalOrder(20));
+        System.out.println(solver.lexicalOrder(13));
     }
 }
