@@ -20,7 +20,7 @@ public class LexicographicalNumbers386 {
     public List<Integer> lexicalOrder(int n) {
 
         List<Integer> answer = new ArrayList<>();
-        for(int i = 1;i<=9;i++){
+        for(int i = 1;i<=n;i++){
             constructNumber(i,n,answer);
         }
 
