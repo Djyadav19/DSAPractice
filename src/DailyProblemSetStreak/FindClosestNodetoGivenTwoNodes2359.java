@@ -6,10 +6,10 @@ public class FindClosestNodetoGivenTwoNodes2359 {
 
     public int closestMeetingNode(int[] edges, int node1, int node2) {
         // since there is only one outgoing node and it is directed so
-        // we can skip createing the adjList as the array will already work like that.
-        // whenever we need to find the closest distance firet try to go with bfs.
+        // we can skip creating the adjList as the array will already work like that.
+        // whenever we need to find the closest distance first try to go with bfs.
         //Map<Integer, Integer> distanceMap1 = bfs(edges,node1);
-        //Map<Integer,Integer> distanMap2 = bfs(edges,node2);
+        //Map<Integer,Integer> distanceMap2 = bfs(edges,node2);
         int[]distance1 = bfs(edges,node1);
         int[]distance2 = bfs(edges,node2);
 

@@ -18,7 +18,7 @@ public class KthSmallestinLexicographicalOrder440 {
     public int findKthNumber(int n, int k) {
 
         int current = 1;
-        k -= 1; // since one  is already considered.
+        k -= 1; // since one is already considered.
 
         while(k>0){
             int numberCount = count(current,current+1,n);

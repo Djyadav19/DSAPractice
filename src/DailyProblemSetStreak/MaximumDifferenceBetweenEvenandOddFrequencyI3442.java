@@ -10,7 +10,7 @@ public class MaximumDifferenceBetweenEvenandOddFrequencyI3442 {
         int[] occuranceCount = new int[26];
         int minEven= Integer.MAX_VALUE,maxOdd = Integer.MIN_VALUE;
         for(int i = 0;i<n;i++){
-             int currentCount = ++occuranceCount[s.charAt(i)-'a'];
+            int currentCount = ++occuranceCount[s.charAt(i)-'a'];
             if(currentCount%2 == 0){
                 if(currentCount < minEven && currentCount != 0){
                     minEven = currentCount;
