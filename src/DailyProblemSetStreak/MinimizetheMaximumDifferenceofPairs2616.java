@@ -1,32 +1,44 @@
 package DailyProblemSetStreak;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 public class MinimizetheMaximumDifferenceofPairs2616 {
+
+    int n;
+    private boolean isValid(int[] nums, int mid, int p) {
+        int i = 0;
+        int pairs = 0;
+
+        while (i < n - 1) {
+            if (nums[i + 1] - nums[i] <= mid) {
+                pairs++;
+                i += 2;
+            } else {
+                i++;
+            }
+        }
+
+        return pairs >= p;
+    }
+
     public int minimizeMax(int[] nums, int p) {
         //let's do with sorting first.
-        int n = nums.length;
+        n = nums.length;
         int ans = Integer.MIN_VALUE;
-        int[] pairs = new int[p];
+        Arrays.sort(nums);
+        int l = 0;
+        int r = nums[n-1] - nums[0];
+        while(l<=r){
+            int mid = (l+r)/2;
 
-        Set<Integer> indexSet = new HashSet<>();
-        while(p-- > 0){
-            int minDiff = Integer.MAX_VALUE;
-            int[] idx = new int[2];
-            for(int i = 0;i<n-1;i++){
-                if(indexSet.contains(i))continue;
-                for(int j = 0;j<n;j++){
-                    if(indexSet.contains(j) || j == i)continue;
-                    if(Math.abs(nums[i]-nums[j]) < minDiff){
-                        minDiff = Math.min(Math.abs(nums[i]-nums[j]),minDiff);
-                        idx[0] = i; idx[1] = j;
-                    }
-                }
+            if(isValid(nums,mid,p)){
+                ans = mid;
+                r = mid-1;
+            } else{
+                l = mid + 1;
             }
-            ans = Math.max(minDiff,ans);
-            indexSet.add(idx[0]);
-            indexSet.add(idx[1]);
         }
         return ans;
     }
