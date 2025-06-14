@@ -26,7 +26,7 @@ public class ArrayStack<T> implements Stack<T>{
 
     @Override
     public void push(T t) {
-        if(size == capcity){
+        if(size > 0 && size == capcity){
             increaseCapcity();
         }
         data[size] = t;
