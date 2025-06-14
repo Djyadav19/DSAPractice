@@ -5,23 +5,12 @@ import java.util.LinkedList;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 
-public class Stack<T> implements Iterable<T> {
-    @Override
-    public Iterator<T> iterator() {
-        return null;
-    }
+public interface Stack<T>   {
+    public int size();
+    public boolean isEmpty();
+    public void push(T t);
+    public T pop();
+    public T peek();
 
-    @Override
-    public void forEach(Consumer<? super T> action) {
-        Iterable.super.forEach(action);
-    }
-
-    @Override
-    public Spliterator<T> spliterator() {
-        return Iterable.super.spliterator();
-    }
-
-    private LinkedList<T> list = new LinkedList<T>();
-
-
+    public void clear();
 }
