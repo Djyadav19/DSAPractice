@@ -31,11 +31,11 @@ public class RedundantConnection684 {
             int size2 = size[root2];
 
             if(size1 > size2){
-                parent[node2] = node1;
-                size[node1] += size[node2];
+                parent[root2] = root1;
+                size[root1] += size[root2];
             } else {
-                parent[node1] = node2;
-                size[node2] += size[node1];
+                parent[root1] = node2;
+                size[root2] += size[root1];
             }
             return true;
         }
@@ -46,8 +46,7 @@ public class RedundantConnection684 {
         int[] ans = new int[2];
         for(int[] edge : edges){
             if(!dsu.union(edge[0]-1,edge[1]-1)){
-                ans[0] = edge[0];
-                ans[1] = edge[1];
+                return edge;
             }
         }
         return ans;
