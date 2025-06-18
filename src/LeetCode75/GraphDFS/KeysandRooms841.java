@@ -1,4 +1,4 @@
-package LeetCode75;
+package LeetCode75.GraphDFS;
 
 import java.util.HashSet;
 import java.util.List;

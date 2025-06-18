@@ -1,4 +1,4 @@
-package LeetCode75;
+package LeetCode75.HashMapAndSet;
 
 import java.util.*;
 

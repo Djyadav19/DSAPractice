@@ -1,4 +1,4 @@
-package LeetCode75;
+package LeetCode75.String;
 
 public class StringCompression443 {
     public int compress(char[] chars) {

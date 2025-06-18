@@ -1,4 +1,4 @@
-package LeetCode75;
+package LeetCode75.TwoPointers;
 
 public class ContainerWithMostWater11 {
     public int maxArea(int[] height) {
