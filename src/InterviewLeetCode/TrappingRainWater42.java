@@ -1,4 +1,4 @@
-package RandomLeetCode;
+package InterviewLeetCode;
 
 public class TrappingRainWater42 {
     public int trap(int[] height) {
