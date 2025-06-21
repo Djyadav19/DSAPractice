@@ -3,11 +3,29 @@ package DP.DP1D;
 import java.util.Arrays;
 
 public class FibonacciNumber509 {
+    private int findFibUsingRecursionTopToDownApproch(int n, int[] dp) {
+        if(n == 0 || n == 1) return n;
+        if(dp[n] != -1 ) return dp[n];
+        dp[n] = findFibUsingRecursionTopToDownApproch(n-1,dp)+findFibUsingRecursionTopToDownApproch(n-2,dp);
+        return dp[n];
+    }
+
     public int fib(int n) {
         if(n == 0 || n == 1) return n;
+        int a = 1, b= 0;
+        int c = 0;
+        for(int i = 2 ;i<=n;i++){
+            c = a + b;
+            b = a;
+            a = c;
+        }
+        return c;
+        /**
         int[] dp = new int [n+1];
         dp[0] = 0;
         dp[1] = 1;
+        */
+
         /**
          * now let's try bottoms up approach where we already have value.
          * let's define the state here.
@@ -18,11 +36,18 @@ public class FibonacciNumber509 {
          * dp[4] = dp[3] + dp[2] => 2+1 = 3;
          * dp[5] = dp[4] + dp[3] => 3+2 = 5;
          */
-
+        /**
+         * now here what we can see that is only last two values are required to calculate the
+         * current index fib value.
+         * so Instead of array we can use c = a + b; a= prev b = prev-1 index's value.
+         */
+        /**
         for(int i = 2 ;i<=n;i++){
             dp[i] = dp[i-1] + dp[i-2];
         }
         return dp[n];
+
+         */
         /*
         so here we are using the recursion and saving the result in on memo. to resue it
         */
@@ -32,13 +57,6 @@ public class FibonacciNumber509 {
         dp[1] = 1;
         return findFibUsingRecursionTopToDownApproch(n, dp);
         */
-    }
-
-    private int findFibUsingRecursionTopToDownApproch(int n, int[] dp) {
-        if(n == 0 || n == 1) return n;
-        if(dp[n] != -1 ) return dp[n];
-        dp[n] = findFibUsingRecursionTopToDownApproch(n-1,dp)+findFibUsingRecursionTopToDownApproch(n-2,dp);
-        return dp[n];
     }
 
     /**
