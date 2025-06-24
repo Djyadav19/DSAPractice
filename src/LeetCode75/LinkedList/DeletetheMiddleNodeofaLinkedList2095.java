@@ -23,7 +23,20 @@ public class DeletetheMiddleNodeofaLinkedList2095 {
 
     class Solution {
         public ListNode deleteMiddle(ListNode head) {
-            if(head.next == null) return null;
+            if(head == null || head.next == null) return null;
+
+            // let's try with first and slow .
+            ListNode slow = head;
+            ListNode fast = head;
+            ListNode prev = head;
+            while(fast != null && fast.next != null){
+                fast = fast.next.next;
+                prev = slow;
+                slow = slow.next;
+            }
+            prev.next = slow.next;
+            return head;
+            /*
             int size = 0;
             ListNode temp = head;
             while(temp != null){
@@ -48,6 +61,7 @@ public class DeletetheMiddleNodeofaLinkedList2095 {
                 temp1 = temp1.next;
             }
             return null;
+            */
         }
     }
 
