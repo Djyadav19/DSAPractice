@@ -1,7 +1,9 @@
 package DailyProblemSetStreak;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class FindAllKDistantIndicesinanArray2200 {
     public List<Integer> findKDistantIndices(int[] nums, int key, int k) {
