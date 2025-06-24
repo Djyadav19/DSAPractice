@@ -52,25 +52,25 @@ public class DeletetheMiddleNodeofaLinkedList2095 {
     }
 
     public static void main(String[] args) {
-            DeletetheMiddleNodeofaLinkedList2095 outer = new DeletetheMiddleNodeofaLinkedList2095();
-            Solution solution = outer.new Solution();
+        DeletetheMiddleNodeofaLinkedList2095 outer = new DeletetheMiddleNodeofaLinkedList2095();
+        Solution solution = outer.new Solution();
 
-            // Create linked list: 1 -> 2 -> 3 -> 4 -> 5
-            ListNode head = outer.new ListNode(1);
-            head.next = outer.new ListNode(2);
-            head.next.next = outer.new ListNode(3);
-            head.next.next.next = outer.new ListNode(4);
-            head.next.next.next.next = outer.new ListNode(5);
+        // Create linked list: 1 -> 2 -> 3 -> 4 -> 5
+        ListNode head = outer.new ListNode(1);
+        head.next = outer.new ListNode(2);
+        head.next.next = outer.new ListNode(3);
+        head.next.next.next = outer.new ListNode(4);
+        head.next.next.next.next = outer.new ListNode(5);
 
-            // Delete middle node
-            ListNode result = solution.deleteMiddle(head);
+        // Delete middle node
+        ListNode result = solution.deleteMiddle(head);
 
-            // Print resulting list
-            ListNode curr = result;
-            while (curr != null) {
-                System.out.print(curr.val + " ");
-                curr = curr.next;
-            }
-            // Expected output: 1 2 4 5
+        // Print resulting list
+        ListNode curr = result;
+        while (curr != null) {
+            System.out.print(curr.val + " ");
+            curr = curr.next;
         }
+        // Expected output: 1 2 4 5
+    }
 }
