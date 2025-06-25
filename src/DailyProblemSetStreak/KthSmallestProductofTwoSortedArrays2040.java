@@ -1,9 +1,18 @@
 package DailyProblemSetStreak;
 
+import java.util.Arrays;
+
 public class KthSmallestProductofTwoSortedArrays2040 {
     public long kthSmallestProduct(int[] nums1, int[] nums2, long k) {
-        long left = -1_000_000_000_0L;  // -1e10
-        long right = 1_000_000_000_0L;  // 1e10
+        long[] candidates = new long[] {
+                (long) nums1[0] * nums2[0],
+                (long) nums1[0] * nums2[nums2.length - 1],
+                (long) nums1[nums1.length - 1] * nums2[0],
+                (long) nums1[nums1.length - 1] * nums2[nums2.length - 1]
+        };
+
+        long left = Arrays.stream(candidates).min().getAsLong();
+        long right = Arrays.stream(candidates).max().getAsLong();
         long result = 0;
 
         while (left <= right) {
