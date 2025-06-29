@@ -5,12 +5,15 @@ import java.util.Map;
 
 public class NumberofSubsequencesThatSatisfytheGivenSumCondition1498 {
 
+
+    private static final int MOD = 1_000_000_007;
     private int count(int [] nums, int curr, int n, int max, int min, int target, boolean taken, Map<String, Integer> memo){
         String key = curr + "," + max + "," + min + "," + taken;
         if(memo.containsKey(key)) return memo.get(key);
         if (curr == n) {
             // Only count non-empty subsequences
             int res = (taken && max + min <= target) ? 1 : 0;
+            res = res % MOD;
             memo.put(key,res);
             return res;
         }
@@ -18,7 +21,7 @@ public class NumberofSubsequencesThatSatisfytheGivenSumCondition1498 {
         int newMax = taken ? Math.max(max, nums[curr]) : nums[curr];
         int newMin = taken ? Math.min(min, nums[curr]) : nums[curr];
         int take = count(nums,curr+1,n,newMax,newMin,target,true, memo);
-        int res =  skip + take;
+        int res =  (skip + take) % MOD;
         memo.put(key,res);
         return res;
     }
@@ -33,7 +36,7 @@ public class NumberofSubsequencesThatSatisfytheGivenSumCondition1498 {
         int start = 0;
         Map<String, Integer> memo = new HashMap<>();
         return count(nums, 0, n, Integer.MIN_VALUE, Integer.MAX_VALUE, target, false, memo);
-       // return answer;
+        // return answer;
     }
 
     public static void main(String[] args) {
