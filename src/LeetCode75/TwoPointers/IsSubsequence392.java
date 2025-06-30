@@ -1,6 +1,19 @@
 package LeetCode75.TwoPointers;
 
 public class IsSubsequence392 {
+    public boolean isSubsequence1(String s, String t) {
+        if(s == null) return false;
+        int i = 0;
+        int j = 0;
+        while(i<s.length() && j< t.length()){
+            if(s.charAt(i)==t.charAt(j)){
+                i++;
+            }
+            j++;
+        }
+        return i==s.length();
+
+    }
     public boolean isSubsequence(String s, String t) {
         if(s==null) return false;
         if(s.length() == t.length()){
@@ -28,7 +41,7 @@ public class IsSubsequence392 {
 
     public static void main(String[] args) {
         IsSubsequence392 solution = new IsSubsequence392();
-        System.out.println(solution.isSubsequence("abc", "ahbgdc")); // true
+        System.out.println(solution.isSubsequence1("abc", "ahbgdc")); // true
         System.out.println(solution.isSubsequence("axc", "ahbgdc")); // false
         System.out.println(solution.isSubsequence("", "ahbgdc")); // true
         System.out.println(solution.isSubsequence("abc", "")); // false
