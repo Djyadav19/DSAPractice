@@ -7,6 +7,67 @@ import java.util.List;
 public class FindtheOriginalTypedStringII3333 {
 
     int MOD = 1_000_000_007;
+
+    public int possibleStringCount(String word, int k) {
+        //count the freq.
+        int freqCount = 1;
+        List<Integer> freqList = new ArrayList<>();
+        for(int i = 1;i<word.length();i++){
+            if(word.charAt(i) == word.charAt(i-1)){
+                freqCount++;
+            }else{
+                freqList.add(freqCount);
+                freqCount = 1;
+            }
+        }
+        freqList.add(freqCount);
+        //now find all the possibilites.
+        long possibilites = 1;
+        for(int freq : freqList){
+            possibilites = (possibilites * freq) %MOD;
+        }
+        if(k <= freqList.size()){
+            return (int)possibilites;
+        }
+        //otherwise we need count all the invalid sceanrios.
+        int n= freqList.size();
+        int[][] dp = new int[n+1][k+1];
+        /**
+         * let try bottom up.
+         * so here we will take the base case from recursion as state definiation.
+         *  so all the value which is greater than k will valid one.
+         *  and for row greater than n will have value 1.
+         */
+        for(int count = k-1;count >= 0;count--){
+            dp[n][count] = 1;
+        }
+
+        //Now will memic the recursion call for filling the 2dArray.
+        for(int i = n-1;i>=0;i--){
+            for(int count = k-1;count >= 0;count--){
+                long invalidCount = 0;
+                for(int take = 1;take<=freqList.get(i);take++){
+                    if(count + take < k){ // invalid count;
+                        invalidCount = (invalidCount + dp[i+1][count+take] )%MOD;
+                    } else{
+                        break;
+                    }
+                }
+                dp[i][count] = (int)invalidCount;
+            }
+        }
+        /**
+        for(int i = 0;i<freqList.size()+1;i++){
+            Arrays.fill(dp[i],-1);
+        }
+
+        long invalid = invalidCount(0,0,freqList,k,dp);
+         */
+        long invalid = dp[0][0];
+        return Math.toIntExact((possibilites - invalid + MOD) % MOD);
+
+    }
+
     private long invalidCount(int curr, int count, List<Integer> freqList, int k, int[][] dp){
         //base case.
         if(curr >= freqList.size()){
@@ -24,36 +85,6 @@ public class FindtheOriginalTypedStringII3333 {
             }
         }
         return dp[curr][count] = (int)invalidCount;
-
-    }
-    public int possibleStringCount(String word, int k) {
-        //count the freq.
-        int count = 1;
-        List<Integer> freqList = new ArrayList<>();
-        for(int i = 1;i<word.length();i++){
-            if(word.charAt(i) == word.charAt(i-1)){
-                count++;
-            }else{
-                freqList.add(count);
-                count = 1;
-            }
-        }
-        freqList.add(count);
-        //now find all the possibilites.
-        long possibilites = 1;
-        for(int freq : freqList){
-            possibilites = (possibilites * freq) %MOD;
-        }
-        if(k <= freqList.size()){
-            return (int)possibilites;
-        }
-        //otherwise we need count all the invalid sceanrios.
-        int[][] dp = new int[freqList.size()+1][k+1];
-        for(int i = 0;i<freqList.size()+1;i++){
-            Arrays.fill(dp[i],-1);
-        }
-        long invalid = invalidCount(0,0,freqList,k,dp);
-        return Math.toIntExact((possibilites - invalid + MOD) % MOD);
 
     }
 
