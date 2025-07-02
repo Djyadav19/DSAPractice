@@ -44,24 +44,24 @@ public class FindtheOriginalTypedStringII3333 {
 
         //Now will memic the recursion call for filling the 2dArray.
         for(int i = n-1;i>=0;i--){
+            int[] prefix = new int[k+1];
+            for(int h = 1;h<=k;h++){ //1 based indexing calculate prefix sum here only .
+                prefix[h] = (prefix[h-1]+ dp[i+1][h-1])%MOD;
+            }
             for(int count = k-1;count >= 0;count--){
-                long invalidCount = 0;
-                for(int take = 1;take<=freqList.get(i);take++){
-                    if(count + take < k){ // invalid count;
-                        invalidCount = (invalidCount + dp[i+1][count+take] )%MOD;
-                    } else{
-                        break;
-                    }
+                int l = count+1;
+                int r = Math.min(count + freqList.get(i), k - 1);
+                if(l<=r){
+                    dp[i][count] = (prefix[r+1]-prefix[l]+MOD)%MOD;
                 }
-                dp[i][count] = (int)invalidCount;
             }
         }
         /**
-        for(int i = 0;i<freqList.size()+1;i++){
-            Arrays.fill(dp[i],-1);
-        }
+         for(int i = 0;i<freqList.size()+1;i++){
+         Arrays.fill(dp[i],-1);
+         }
 
-        long invalid = invalidCount(0,0,freqList,k,dp);
+         long invalid = invalidCount(0,0,freqList,k,dp);
          */
         long invalid = dp[0][0];
         return Math.toIntExact((possibilites - invalid + MOD) % MOD);
