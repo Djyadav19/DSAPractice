@@ -1,6 +1,4 @@
-package DP.DP1D;
-
-import java.util.Arrays;
+package DP.DP2D;
 
 public class MaximumAlternatingSubsequenceSum1911 {
     public long maxAlternatingSum(int[] nums) {
