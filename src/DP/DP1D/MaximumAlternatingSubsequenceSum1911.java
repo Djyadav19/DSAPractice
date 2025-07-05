@@ -4,6 +4,27 @@ import java.util.Arrays;
 
 public class MaximumAlternatingSubsequenceSum1911 {
     public long maxAlternatingSum(int[] nums) {
+        /**
+         * let's try bottom up approach.
+         * so here the state defination will be dp[i][odd] = will contains the max sum if the index is odd.
+         * and dp[i][even] = will contains the max sum if after taking index is even.
+         * and in start we will create a dp[n+][2].
+         * dp[0][odd] = 0 dp[0][even] = 0.
+         * so for two scenarios..
+         * if after taking the value it becomes even.
+         * dp[i][even] = max(take,skip) skip = d[i-1][even]: since no change in even odd. ,take = dp[i-1][odd] - nums[i-1], odd because now after take it becomes even so it means the previous size will of odd.
+         * dp[i][odd] = max(take,skip) skip = dp[i-1][odd]: same size so odd. take = dp[i-1][even]+nums[i-1], even bcz now its odd it means prv size is of odd.
+         */
+        // even = 0, odd = 1;
+        int n = nums.length;
+        long[][] dp = new long[n+1][2];
+        for(int i = 1;i<=n;i++){
+            dp[i][0] = Math.max(dp[i-1][1]-nums[i-1],dp[i-1][0]);
+            dp[i][1] = Math.max(dp[i-1][0]+nums[i-1],dp[i-1][1]);
+        }
+        return Math.max(dp[n][0],dp[n][1]);
+
+        /**
         long answer = 0;
         int n = nums.length;
         int i = 0;
@@ -16,8 +37,8 @@ public class MaximumAlternatingSubsequenceSum1911 {
         dp[0][0]=nums[i];
         answer = findMax(nums,i,isEven,n,dp);
         return answer;
+         */
     }
-
 
     private long findMax(int[]nums,int idx,boolean isEven,int n,long[][]dp){
         if(idx > n-1) return 0;
