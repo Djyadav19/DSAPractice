@@ -19,6 +19,35 @@ public class MaximumLengthofPairChain646 {
     }
     public int findLongestChain(int[][] pairs) {
         int n = pairs.length;
+        /**
+         * here again let' try to solve using bottom up.
+         * As we need to define the state of dp[i] : It means the largest chain till that index.
+         * will iterate upto n and update dp[i] on the condition if pairs[i-1][1] < pairs[i][0].
+         * And first we need to sort the pairs on the first index.
+         */
+        Arrays.sort(pairs, new Comparator<int[]> (){
+            @Override
+            public int compare (int[] arr1 , int[] arr2){
+                return Integer.compare(arr1[0],arr2[0]);
+            }
+        });
+        int [] dp = new int[n];
+        Arrays.fill(dp,1);
+        int ans = 0;
+        for(int i = 0;i<n;i++){
+            int j = 0;
+            while(j<i){
+                if(pairs[j][1]< pairs[i][0]){
+                    dp[i] = Math.max(dp[j]+1,dp[i]);
+                    ans = Math.max(ans,dp[i]);
+                }
+                j++;
+            }
+        }
+        return ans;
+
+
+        /**
         Arrays.sort(pairs, new Comparator<int[]>(){
             @Override
             public int compare(int[] arr1, int[] arr2){
@@ -31,7 +60,7 @@ public class MaximumLengthofPairChain646 {
             Arrays.fill(row, -1);
         }
         return solve(0,-1,pairs,dp);
-
+         */
     }
 
     public static void main(String[] args) {
