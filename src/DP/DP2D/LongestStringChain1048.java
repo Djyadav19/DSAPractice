@@ -6,19 +6,27 @@ public class LongestStringChain1048 {
 
     public int longestStrChain(String[] words) {
         Arrays.sort(words, (a, b) -> Integer.compare(a.length(),b.length()));
-        return solve(0,-1,words);
+        int[][] dp = new int[words.length+1][words.length];
+        for(int[] row : dp){
+            Arrays.fill(row,-1);
+        }
+        return solve(0,-1,words,dp);
 
     }
 
-    private int solve(int curr, int prev,String[] words){
-        if(curr>words.length-1){
+    private int solve(int curr, int prev, String[] words, int[][] dp){
+        if(curr > words.length-1){
             return 0;
         }
+        if(prev != -1 && dp[curr][prev] != -1) return dp[curr][prev];
         int take = 0;
         if(prev == -1 || isPredecessor(words[prev],words[curr])){
-            take = 1 + solve(curr+1,curr,words);
+            take = 1 + solve(curr+1,curr,words, dp);
         }
-        int skip = solve(curr+1,prev,words);
+
+        int skip = solve(curr+1,prev,words, dp);
+        if(prev != -1)
+            dp[curr][prev] = Math.max(take,skip);
         return Math.max(take,skip);
     }
 
