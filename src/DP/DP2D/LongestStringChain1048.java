@@ -5,12 +5,37 @@ import java.util.Arrays;
 public class LongestStringChain1048 {
 
     public int longestStrChain(String[] words) {
+        /**
+         * let's try bottom up again will define a state that dp[i] = longestchain for the ith index.
+         * base case all have Arrays.fill(dp,1); since 1 iteself as its value.
+         * agian take = max(dp[i], dp[j]+1);
+         * skip  means dp[i] iteself .
+         *
+         */
         Arrays.sort(words, (a, b) -> Integer.compare(a.length(),b.length()));
-        int[][] dp = new int[words.length+1][words.length];
+        int[] dp = new int [words.length+1];
+        Arrays.fill(dp,1);
+        int ans = 1;
+        for(int i = 1;i< words.length;i++){
+            int j= 0;
+            while(j<i) {
+                if (isPredecessor(words[j], words[i])) {
+                    //int take = Math.max(dp[i], dp[j]+1);
+                    dp[i] = Math.max(dp[i], dp[j]+1);
+                    ans = Math.max(ans,dp[i]);
+                }
+                j++;
+            }
+        }
+        return ans;
+
+        /**
+         int[][] dp = new int[words.length+1][words.length];
         for(int[] row : dp){
             Arrays.fill(row,-1);
         }
         return solve(0,-1,words,dp);
+         */
 
     }
 
