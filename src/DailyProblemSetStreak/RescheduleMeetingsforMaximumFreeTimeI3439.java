@@ -14,17 +14,14 @@ public class RescheduleMeetingsforMaximumFreeTimeI3439 {
 
         freeTime.add(eventTime-endTime[endTime.length-1]);
         int windowSum = 0;
+        for (int i = 0; i < k + 1 && i < freeTime.size(); i++) {
+            windowSum += freeTime.get(i);
+        }
+        ans = windowSum;
 
-        int i = 0,j = 0;
-        int n = freeTime.size();
-        while(j < n){
-            windowSum += freeTime.get(j);
-            if(i<n && j-i+1 > k+1){
-                windowSum -= freeTime.get(i);
-                i++;
-            }
-            ans = Math.max(ans,windowSum);
-            j++;
+        for (int i = k + 1; i < freeTime.size(); i++) {
+            windowSum = windowSum - freeTime.get(i - (k + 1)) + freeTime.get(i);
+            ans = Math.max(windowSum, ans);
         }
         return ans;
     }
